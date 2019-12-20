@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CouponHistoryService extends BaseService<CouponHistory> {
@@ -30,8 +32,10 @@ public class CouponHistoryService extends BaseService<CouponHistory> {
      *   根据用户id查询所有优惠券
      * @return
      */
-    public List<CouponHistory> getAllCouponHistory(){
-        return couponHistoryMapper.selectAll();
+    public List<CouponHistory> getAllCouponHistory(String token){
+
+        //根据token查询用户
+        return couponHistoryMapper.selectCouponHistoryByMemberId(1);
     }
 
     /**
@@ -39,15 +43,21 @@ public class CouponHistoryService extends BaseService<CouponHistory> {
      * @param couponHistory
      * @return
      */
-    public Integer saveOrUpdateCouponHistory(CouponHistory couponHistory){
+    public Map<String,Object> saveOrUpdateCouponHistory(CouponHistory couponHistory){
         Integer result;
-
+        Map<String,Object> resultData=new HashMap<>();
         if (null!=couponHistory.getId()) {
             result = couponHistoryMapper.insert(couponHistory);
+            resultData.put("code",StatusEnum.INSERT_OPERATION.getCode());
+            resultData.put("msg",StatusEnum.INSERT_OPERATION.getMsg());
+            resultData.put("data",result);
         }else {
             result = couponHistoryMapper.updateByPrimaryKey(couponHistory);
+            resultData.put("code",StatusEnum.UPDATE_OPERATION.getCode());
+            resultData.put("msg",StatusEnum.UPDATE_OPERATION.getMsg());
+            resultData.put("data",result);
         }
-        return result;
+        return resultData;
     }
 
     /**

@@ -11,6 +11,34 @@
 
     <artifactId>102-repast-app-consumer-management</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>102-repast-app-consumer-6081</module>
+    </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.aaa.lee.repast</groupId>
+            <artifactId>102-repast-app-config</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aaa.lee.repast</groupId>
+            <artifactId>102-repast-app-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

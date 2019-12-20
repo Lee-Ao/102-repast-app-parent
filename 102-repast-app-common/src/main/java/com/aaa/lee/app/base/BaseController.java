@@ -81,6 +81,21 @@ public class BaseController {
     }
 
     /**
+     * 可自定义返回所需的code  msg  和数据
+     * @param code
+     * @param msg
+     * @param data
+     * @return
+     */
+    protected ResultData success(String code, String msg, Object data) {
+        ResultData resultData = new ResultData();
+        resultData.setCode(code);
+        resultData.setMsg(msg);
+        resultData.setData(data);
+        return resultData;
+    }
+
+    /**
      * @author Seven Lee
      * @description
      *      登录失败，返回系统消息
@@ -95,6 +110,15 @@ public class BaseController {
         resultData.setMsg(LoginStatus.LOGIN_FAILED.getMsg());
         return resultData;
     }
+
+    protected ResultData failed(String code, String msg) {
+        ResultData resultData = new ResultData();
+        resultData.setCode(code);
+        resultData.setMsg(msg);
+        return resultData;
+    }
+
+
 
     // TODO 暂时未完成，需要什么方法自己添加
 
