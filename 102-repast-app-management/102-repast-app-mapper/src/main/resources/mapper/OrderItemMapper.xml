@@ -30,4 +30,8 @@
     <result column="gift_growth" property="giftGrowth" jdbcType="INTEGER" />
     <result column="product_attr" property="productAttr" jdbcType="VARCHAR" />
   </resultMap>
+
+  <select id="selectOrderItem" resultMap="BaseResultMap">
+    select * from oms_order_item where order_id=#{orderId}
+  </select>
 </mapper>

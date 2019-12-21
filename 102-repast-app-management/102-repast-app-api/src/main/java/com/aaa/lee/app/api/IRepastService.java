@@ -4,13 +4,16 @@ import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.fallback.RepastFallback;
 import com.aaa.lee.app.model.Coupon;
 import com.aaa.lee.app.model.CouponHistory;
+import com.aaa.lee.app.model.OrderItem;
 import com.aaa.lee.app.status.StatusEnum;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 如果是简单类型传递数据可以传递多个，但是每一个必须要用@RequestParam
@@ -55,4 +58,11 @@ public interface IRepastService {
     @PostMapping("/selectCouponById")
     ResultData<Coupon> selectCouponById(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId);
 
+    /**
+     * 查询订单信息
+     * @param toKen
+     * @return
+     */
+    @GetMapping("/orderItemSelect")
+    Map<String,Object> selectAllOrderItem(@RequestParam("token") String toKen);
 }
