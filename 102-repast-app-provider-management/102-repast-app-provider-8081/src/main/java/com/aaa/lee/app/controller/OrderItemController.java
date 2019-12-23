@@ -19,8 +19,8 @@ public class OrderItemController extends BaseController {
      * @return
      */
     @PostMapping("/orderItemSelect")
-    public Map<String,Object> selectAllOrderItem(@RequestParam("toKen") String toKen,@RequestParam("memberId") Long memberId){
-        Map<String, Object> resultMap = orderItemService.selectAllOrderItem(memberId);
+    public Map<String,Object> selectAllOrderItem(@RequestParam("toKen") String toKen){
+        Map<String, Object> resultMap = orderItemService.selectAllOrderItem(toKen);
         if(resultMap.size()>0){
             return resultMap;
         }else{

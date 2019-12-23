@@ -21,8 +21,8 @@ public class OrderItemController extends BaseController {
 
     @PostMapping("/orderItemSelect")
     @ApiOperation(value = "订单", notes = "执行订单查询操作")
-    public ResultData<OrderItem> selectAllOrderItem(String toKen,Long memberId){
-            Map<String, Object> stringObjectMap = repastService.selectAllOrderItem(toKen,memberId);
+    public ResultData<OrderItem> selectAllOrderItem(String toKen){
+            Map<String, Object> stringObjectMap = repastService.selectAllOrderItem(toKen);
             if (stringObjectMap.size()>0){
                 return success(stringObjectMap);
             }

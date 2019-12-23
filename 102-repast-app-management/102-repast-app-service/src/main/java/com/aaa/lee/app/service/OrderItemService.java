@@ -1,8 +1,10 @@
 package com.aaa.lee.app.service;
 
 import com.aaa.lee.app.base.BaseService;
+import com.aaa.lee.app.mapper.MemberMapper;
 import com.aaa.lee.app.mapper.OrderItemMapper;
 import com.aaa.lee.app.mapper.OrderMapper;
+import com.aaa.lee.app.model.Member;
 import com.aaa.lee.app.model.Order;
 import com.aaa.lee.app.model.OrderItem;
 import com.aaa.lee.app.status.StatusEnum;
@@ -22,6 +24,9 @@ public class OrderItemService extends BaseService<OrderItem> {
     @Autowired
     private OrderMapper orderMapper;
 
+    @Autowired
+    private MemberMapper memberMapper;
+
 
     @Override
     public Mapper<OrderItem> getMapper() {
@@ -33,28 +38,33 @@ public class OrderItemService extends BaseService<OrderItem> {
      *
      * @return
      */
-    public Map<String, Object> selectAllOrderItem(Long memberId) {
+    public Map<String, Object> selectAllOrderItem(String toKen) {
                 Map<String, Object> resultMap = new HashMap<>();
-                List<Order> orders = orderMapper.selectMemberId(memberId);
-                if (orders.size()>0) {
-                    for (Order order: orders) {
-                        Long orderId = order.getId();
-                        List<OrderItem> orderItems = orderItemMapper.selectOrderItem(orderId);
-                        if (orderItems.size()>0){
-                            resultMap.put("code", StatusEnum.EXIST.getCode());
-                            resultMap.put("msg",StatusEnum.EXIST.getMsg());
-                            resultMap.put("data1",orderItems);
-                            resultMap.put("data",orders);
-                            return resultMap;
-                        }else{
-                            resultMap.put("code",StatusEnum.NOT_EXIST.getCode());
-                            resultMap.put("msg",StatusEnum.NOT_EXIST.getMsg());
+                Member member = new Member();
+                Member memberOne = memberMapper.selectOne(member.setToken(toKen));
+                if (memberOne.getId() != null){
+                    List<Order> orders = orderMapper.selectMemberId(memberOne.getId());
+                    if (orders.size()>0) {
+                        for (Order order: orders) {
+                            Long orderId = order.getId();
+                            List<OrderItem> orderItems = orderItemMapper.selectOrderItem(orderId);
+                            if (orderItems.size()>0){
+                                resultMap.put("code", StatusEnum.EXIST.getCode());
+                                resultMap.put("msg",StatusEnum.EXIST.getMsg());
+                                resultMap.put("data1",orderItems);
+                                resultMap.put("data",orders);
+                                return resultMap;
+                            }else{
+                                resultMap.put("code",StatusEnum.NOT_EXIST.getCode());
+                                resultMap.put("msg",StatusEnum.NOT_EXIST.getMsg());
+                            }
                         }
+                    }else {
+                        resultMap.put("code",StatusEnum.NOT_EXIST.getCode());
+                        resultMap.put("msg",StatusEnum.NOT_EXIST.getMsg());
                     }
-                }else {
-                    resultMap.put("code",StatusEnum.NOT_EXIST.getCode());
-                    resultMap.put("msg",StatusEnum.NOT_EXIST.getMsg());
                 }
+
         return resultMap;
     }
 

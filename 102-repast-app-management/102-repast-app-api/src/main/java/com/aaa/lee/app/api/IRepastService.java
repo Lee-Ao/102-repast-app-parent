@@ -58,7 +58,7 @@ public interface IRepastService {
      * @return
      */
     @PostMapping("/orderItemSelect")
-    Map<String,Object> selectAllOrderItem(@RequestParam("toKen") String toKen, @RequestParam("memberId") Long memberId);
+    Map<String,Object> selectAllOrderItem(@RequestParam("toKen") String toKen);
 
     /**
      * 根据状态查询订单信息

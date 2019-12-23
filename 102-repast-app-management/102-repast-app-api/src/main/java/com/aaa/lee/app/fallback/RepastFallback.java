@@ -49,7 +49,7 @@ public class RepastFallback implements FallbackFactory<IRepastService> {
             }
 
             @Override
-            public Map<String,Object> selectAllOrderItem(String toKen,Long memberId) {
+            public Map<String,Object> selectAllOrderItem(String toKen) {
                 return null;
             }
 
