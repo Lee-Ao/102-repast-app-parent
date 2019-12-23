@@ -2,6 +2,10 @@ package com.aaa.lee.app.api;
 
 import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.fallback.RepastFallback;
+import com.aaa.lee.app.model.Coupon;
+import com.aaa.lee.app.model.CouponHistory;
+import com.aaa.lee.app.model.IntegrationChangeHistory;
+import com.aaa.lee.app.status.StatusEnum;
 import com.aaa.lee.app.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +55,31 @@ public interface IRepastService {
      */
     @PostMapping("/selectCouponById")
     ResultData<Coupon> selectCouponById(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId);
+
+    /**
+     * 根据token查询该用户的积分变动历史表
+     * @param token
+     * @return
+     */
+    @PostMapping("/getAllIntegrationChangeHistoryByToken")
+    ResultData<IntegrationChangeHistory> getAllIntegrationChangeHistoryByToken(@RequestParam("token") String token);
+
+    /**
+     * 新增积分变动历史表
+     * @param integrationChangeHistory
+     * @return
+     */
+    @PostMapping("/insertIntegrationChangeHistoryByToken")
+    ResultData<IntegrationChangeHistory>  insertIntegrationChangeHistoryByToken(@RequestBody IntegrationChangeHistory integrationChangeHistory);
+
+    /**
+     * 用户消费后对用户积分进行新增操作
+     * @param token
+     * @return
+     */
+    @PostMapping("addMemberIntegration")
+    ResultData addMemberIntegration(@RequestParam("token")String token);
+
 
     /**
      * 查询订单信息
