@@ -13,15 +13,13 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class OrderItemService extends BaseService<OrderItem> {
     @Autowired
     private OrderItemMapper orderItemMapper;
-
-    @Autowired
-    private MemberMapper memberMapper;
 
     @Autowired
     private OrderMapper orderMapper;
@@ -37,38 +35,22 @@ public class OrderItemService extends BaseService<OrderItem> {
      *
      * @return
      */
-    public Map<String, Object> selectAllOrderItem(String toKen) {
-        Map<String, Object> resultMap = new HashMap<>();
-        Member member = new Member();
-        //根据token获取会员信息
-        Member memberOne = memberMapper.selectOne(member.setToken(toKen));
-            //判断会员id是否为空
-            if (null != memberOne.getId() && !"".equals(memberOne.getId())) {
-                //根据会员id查询所有的订单信息
-                Order order = orderMapper.selectMemberId(memberOne.getId());
-                //判断订单的id是否为空
-                if (null != order.getId() && !"".equals(order.getId())) {
-                    //如果不为空，根据订单的id查询详情订单
-                    OrderItem orderItem = orderItemMapper.selectOrderItem(order.getId());
-                    //判断详情订单是否为空
-                    if (null != orderItem && !"".equals(orderItem)){
-                        resultMap.put("code", StatusEnum.EXIST.getCode());
-                        resultMap.put("msg",StatusEnum.EXIST.getMsg());
-                        resultMap.put("data1",orderItem);
-                        resultMap.put("data",order);
-                        return resultMap;
-                    }else {
-                        resultMap.put("code",StatusEnum.NOT_EXIST.getCode());
-                        resultMap.put("msg",StatusEnum.NOT_EXIST.getMsg());
+    public Map<String, Object> selectAllOrderItem(Long memberId) {
+                Map<String, Object> resultMap = new HashMap<>();
+                List<Order> orders = orderMapper.selectMemberId(memberId);
+                if (orders.size()>0) {
+                    for (Order order: orders) {
+                        Long orderId = order.getId();
+                        List<OrderItem> orderItems = orderItemMapper.selectOrderItem(orderId);
+                        if (orderItems.size()>0){
+                            resultMap.put("code", StatusEnum.EXIST.getCode());
+                            resultMap.put("msg",StatusEnum.EXIST.getMsg());
+                            resultMap.put("data1",orderItems);
+                            resultMap.put("data",orders);
+                            return resultMap;
+                        }
                     }
-                }else {
-                    resultMap.put("code",StatusEnum.NOT_EXIST.getCode());
-                    resultMap.put("msg",StatusEnum.NOT_EXIST.getMsg());
                 }
-         }else{
-                resultMap.put("code",StatusEnum.NOT_EXIST.getCode());
-                resultMap.put("msg",StatusEnum.NOT_EXIST.getMsg());
-            }
-        return resultMap;
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.fallback.RepastFallback;
 import com.aaa.lee.app.model.Coupon;
 import com.aaa.lee.app.model.CouponHistory;
+import com.aaa.lee.app.model.Member;
 import com.aaa.lee.app.model.OrderItem;
 import com.aaa.lee.app.status.StatusEnum;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -60,9 +61,9 @@ public interface IRepastService {
 
     /**
      * 查询订单信息
-     * @param toKen
+     * @param
      * @return
      */
-    @GetMapping("/orderItemSelect")
-    Map<String,Object> selectAllOrderItem(@RequestParam("token") String toKen);
+    @PostMapping("/orderItemSelect")
+    Map<String,Object> selectAllOrderItem(@RequestParam("toKen") String toKen, @RequestParam("memberId") Long memberId);
 }

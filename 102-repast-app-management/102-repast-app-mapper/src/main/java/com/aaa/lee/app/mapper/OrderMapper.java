@@ -4,6 +4,7 @@ import com.aaa.lee.app.model.Order;
 import tk.mybatis.mapper.common.Mapper;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Resource
 public interface OrderMapper extends Mapper<Order> {
@@ -12,5 +13,5 @@ public interface OrderMapper extends Mapper<Order> {
      * @param memberId
      * @return
      */
-    Order selectMemberId(Long memberId);
+    List<Order> selectMemberId(Long memberId);
 }
