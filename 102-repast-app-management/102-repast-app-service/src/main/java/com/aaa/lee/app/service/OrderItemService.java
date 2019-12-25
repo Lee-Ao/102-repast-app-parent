@@ -11,7 +11,6 @@ import com.aaa.lee.app.status.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,8 +77,7 @@ public class OrderItemService extends BaseService<OrderItem> {
         Map<String, Object> resultMap = new HashMap<>();
         List<Order> orders = orderMapper.selectStatus(memberId, status);
         if (orders.size()>0){
-            for (Order order: orders
-                 ) {
+            for (Order order: orders) {
                 List<OrderItem> orderItems = orderItemMapper.selectOrderItem(order.getId());
                 if (orderItems.size() > 0) {
                     resultMap.put("code", StatusEnum.EXIST.getCode());

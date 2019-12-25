@@ -57,6 +57,11 @@ public class RepastFallback implements FallbackFactory<IRepastService> {
             public Map<String,Object> orderStatusSelect(String toKen, Long memberId, Long status) {
                 return null;
             }
+
+            @Override
+            public ResultData selectFund(String toKen) {
+                return null;
+            }
         };
         return null;
     }

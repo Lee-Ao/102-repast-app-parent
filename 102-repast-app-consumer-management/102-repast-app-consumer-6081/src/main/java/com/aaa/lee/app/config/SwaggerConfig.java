@@ -36,7 +36,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("SAAS 接口文档")
                 .description("SAAS Framework 接口文档项目描述")
-                .contact(new Contact("李壮", "http://www.seven.com", "sevenLee@gmain.com"))
+                .contact(new Contact("aaa", "http://www.seven.com", "sevenLee@gmain.com"))
                 .version("1.0")
                 .build();
     }

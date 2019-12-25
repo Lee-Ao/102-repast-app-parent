@@ -22,10 +22,12 @@ public class OrderItemController extends BaseController {
     @PostMapping("/orderItemSelect")
     @ApiOperation(value = "订单", notes = "执行订单查询操作")
     public ResultData<OrderItem> selectAllOrderItem(String toKen){
+        if (toKen != null){
             Map<String, Object> stringObjectMap = repastService.selectAllOrderItem(toKen);
             if (stringObjectMap.size()>0){
                 return success(stringObjectMap);
             }
+        }
         return failed();
 
     }
@@ -33,9 +35,11 @@ public class OrderItemController extends BaseController {
     @PostMapping("/orderStatusSelect")
     @ApiOperation(value = "订单查询", notes = "执行根据状态查询订单操作")
     public ResultData orderStatusSelect(String toKen, Long memberId, Long status){
-        Map<String, Object> stringObjectMap = repastService.orderStatusSelect(toKen, memberId, status);
-        if (stringObjectMap.size()>0){
-            return success(stringObjectMap);
+        if (toKen != null){
+            Map<String, Object> stringObjectMap = repastService.orderStatusSelect(toKen, memberId, status);
+            if (stringObjectMap.size()>0){
+                return success(stringObjectMap);
+            }
         }
         return failed();
 

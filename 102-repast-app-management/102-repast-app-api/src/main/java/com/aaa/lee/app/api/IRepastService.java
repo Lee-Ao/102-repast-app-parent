@@ -97,4 +97,13 @@ public interface IRepastService {
      */
     @PostMapping("/orderStatusSelect")
     Map<String,Object> orderStatusSelect(@RequestParam("toKen") String toKen, @RequestParam("memberId") Long memberId, @RequestParam("status") Long status);
+
+
+    /**
+     * 查询资金明细
+     */
+    @PostMapping("/selectFund")
+    ResultData selectFund(@RequestParam("toKen") String toKen);
 }
+
+

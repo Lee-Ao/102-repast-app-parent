@@ -34,4 +34,8 @@
     <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
     <result column="receive_note" property="receiveNote" jdbcType="VARCHAR" />
   </resultMap>
+
+  <select id="selectFund" resultMap="BaseResultMap">
+    select * from oms_order_return_apply where order_id=#{orderId}
+  </select>
 </mapper>
