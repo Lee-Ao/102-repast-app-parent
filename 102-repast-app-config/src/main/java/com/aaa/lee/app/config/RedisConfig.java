@@ -16,13 +16,15 @@ import java.util.Set;
  * @Description
  *      只能使用@Configuration不能使用@SpringBootApplication注解
  **/
-@Configuration
+//@Configuration
 public class RedisConfig {
+/*
 
     @Autowired
     private RedisProperties redisProperties;
+*/
 
-    public JedisCluster jedisCluster() {
+   /* public JedisCluster jedisCluster() {
         String nodes = redisProperties.getNodes();
         String[] split = nodes.split(",");
         Set<HostAndPort> hostAndPortSet = new HashSet<HostAndPort>();
@@ -33,6 +35,6 @@ public class RedisConfig {
         }
         JedisCluster jedisCluster = new JedisCluster(hostAndPortSet, Integer.parseInt(redisProperties.getCommandTimeout()), Integer.parseInt(redisProperties.getMaxAttempts()));
         return jedisCluster;
-    }
+    }*/
 
 }

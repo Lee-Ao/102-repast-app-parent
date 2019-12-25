@@ -14,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @Company AAA软件教育
  * @Author Seven Lee
+ * @Date Create in 2019/12/19 15:01
  * @Date Create in 2019/11/21 8:47
  * @Description
  **/
@@ -21,6 +22,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /**
+     * @author Seven Lee
+     * @description
+     *      RequestHandlerSelectors.basePackage():扫描需要访问的controller
+     *      SAAS:自定义化系统
+     * @param []
+     * @date 2019/12/19
+     * @return springfox.documentation.spring.web.plugins.Docket
+     * @throws
+    **/
+    @Bean
+    public Docket createRrestApi() {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -36,6 +49,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("SAAS 接口文档")
                 .description("SAAS Framework 接口文档项目描述")
+                .contact(new Contact("Seven Lee", "http://www.seven.com", "sevenLee@gmain.com"))
                 .contact(new Contact("aaa", "http://www.seven.com", "sevenLee@gmain.com"))
                 .version("1.0")
                 .build();

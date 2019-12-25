@@ -4,13 +4,18 @@ import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.fallback.RepastFallback;
 import com.aaa.lee.app.model.Coupon;
 import com.aaa.lee.app.model.CouponHistory;
+import com.aaa.lee.app.model.MemberReceiveAddress;
 import com.aaa.lee.app.model.IntegrationChangeHistory;
 import com.aaa.lee.app.status.StatusEnum;
+import com.aaa.lee.app.model.Member;
 import com.aaa.lee.app.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,15 +25,78 @@ import java.util.Map;
 @FeignClient(value = "userinfo-interface-provider", fallbackFactory = RepastFallback.class)
 public interface IRepastService {
 
+
+    /**
+     * @author Seven Lee
+     * @description
+     *      登录熔断数据
+     * @param [member]
+     * @date 2019/12/19
+     * @return java.lang.Boolean
+     * @throws
+    **/
+    @PostMapping("/doLogin")
+    Boolean doLogin(@RequestBody Member member);
+
+
+    /**
+     * 根据token查寻当前用户信息接口
+     * @param token
+     * @return
+     */
+    @PostMapping("/check")
+    ResultData<List<Member>> check(@RequestParam("token") String token);
+
+
+    /**
+     * 根据token查寻个人用户信息接口
+     * @param token
+     * @return
+     */
+    @PostMapping("/checkOne")
+    Member checkOne(@RequestParam("token") String token);
+
+
+    /**
+     * 修改个人信息接口
+     * @param member
+     * @param token
+     * @return
+     */
+    @PostMapping("/update")
+    ResultData<Member> update(@RequestBody Member member,@RequestParam("token") String token);
+
+
+
     /**
      * 优惠券使用历史操作
+     * @param token
+     * @return
+     */
+    /**
+     * 获取所有优惠券信息
+     * @param token
+     * @return
      */
     @PostMapping("/getAllCouponHistory")
     ResultData<CouponHistory> getAllCouponHistory(@RequestParam("token")String token);
 
+    /**
+     * 修改
+     * @param token
+     * @param couponHistory
+     * @return
+     */
     @PostMapping("/saveOrUpdateCouponHistory")
     ResultData<CouponHistory> saveOrUpdateCouponHistory(@RequestParam("token") String token,@RequestBody CouponHistory couponHistory);
 
+    /**
+     * 删除
+     * @param token
+     * @param id
+     * @param useState
+     * @return
+     */
     @PostMapping("/deleteCouponHistory")
     ResultData<CouponHistory> deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id,@RequestParam("useState") Integer useState );
 
@@ -55,6 +123,41 @@ public interface IRepastService {
      */
     @PostMapping("/selectCouponById")
     ResultData<Coupon> selectCouponById(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId);
+
+    /**
+     * 查询会员收货地址
+     * @param token
+     * @param id
+     * @return
+     */
+    @PostMapping("/checkAddress")
+    ResultData checkAddress(@RequestParam("token")String token);
+
+    /**
+     * 新增和修改收货地址
+     * @param memberReceiveAddress
+     * @return
+     */
+    @PostMapping("/saveOrUpdateAddress")
+    ResultData saveOrUpdateAddress(@RequestBody MemberReceiveAddress memberReceiveAddress);
+
+    /**
+     * 删除收货地址
+     * @param token
+     * @param id
+     * @return
+     */
+    @PostMapping("/deleteAddress")
+    ResultData deleteAddress(@RequestParam("token")String token,@RequestParam("id") Long id);
+
+    /**
+     * 修改地址状态
+     * @param token
+     * @param addressId
+     * @return
+     */
+    @PostMapping("/updateAddressStatus")
+    ResultData updateAddressStatus(@RequestParam("token")String token,@RequestParam("id") Long id,@RequestParam("memberId")Long memberId);
 
     /**
      * 根据token查询该用户的积分变动历史表

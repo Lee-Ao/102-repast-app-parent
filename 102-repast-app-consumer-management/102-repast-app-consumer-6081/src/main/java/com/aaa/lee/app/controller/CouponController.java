@@ -24,21 +24,21 @@ public class CouponController {
      *  商家或者系统发放优惠券时需要调用 进行优惠券的添加
      */
     @PostMapping("/insertCoupon")
-    ResultData<Coupon> insertCoupon(String token,Coupon coupon){
+    public ResultData<Coupon> insertCoupon(String token,Coupon coupon){
         return couponService.insertCoupon(token,coupon);
     };
     /**
      * 使用优惠券数量的操作
      */
     @PostMapping("/useCoupon")
-    ResultData<Coupon> useCoupon(String token,Integer couponId){
+    public ResultData<Coupon> useCoupon(String token,Integer couponId){
         return couponService.useCoupon(token,couponId);
     };
     /**
      * 根据优惠券id查询优惠券
      */
     @PostMapping("/selectCouponById")
-    ResultData<Coupon> selectCouponById(String token,Integer couponId){
+    public ResultData<Coupon> selectCouponById(String token,Integer couponId){
         return couponService.selectCouponById(token,couponId);
     };
 

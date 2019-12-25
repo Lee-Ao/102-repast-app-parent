@@ -16,4 +16,16 @@
     <result column="region" property="region" jdbcType="VARCHAR" />
     <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
   </resultMap>
+
+  <update id="updateAddressStatus1">
+    update ums_member_receive_address set default_status=0 where member_id=#{member_id}
+  </update>
+
+  <update id="updateAddressStatus">
+    update ums_member_receive_address set default_status= 1 where id=#{id}
+  </update>
+
+  <select id="selectcheckAddress" resultMap="BaseResultMap">
+    select * from ums_member_receive_address where member_id=#{member_id}
+  </select>
 </mapper>
