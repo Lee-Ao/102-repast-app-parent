@@ -87,7 +87,7 @@ public class BaseController {
      * @param data
      * @return
      */
-    protected ResultData success(String code, String msg, Object data) {
+    protected ResultData success(String code, String msg,Object data) {
         ResultData resultData = new ResultData();
         resultData.setCode(code);
         resultData.setMsg(msg);

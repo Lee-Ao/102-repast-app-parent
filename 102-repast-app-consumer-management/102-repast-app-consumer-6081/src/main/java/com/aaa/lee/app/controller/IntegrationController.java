@@ -41,7 +41,7 @@ public class IntegrationController extends BaseController {
      * @param token
      * @return
      */
-    @PostMapping("addMemberIntegration")
+    @PostMapping("/addMemberIntegration")
     ResultData addMemberIntegration(String token){
         return IntegrationService.addMemberIntegration(token);
     }

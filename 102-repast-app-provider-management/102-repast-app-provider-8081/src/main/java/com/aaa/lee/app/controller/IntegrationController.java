@@ -29,9 +29,9 @@ public class IntegrationController extends BaseController {
         public ResultData<IntegrationChangeHistory> getAllIntegrationChangeHistoryByToken(@RequestParam("token") String token){
             List<IntegrationChangeHistory> integrationChangeHistories = integrationService.getAllIntegrationChangeHistoryByToken(token);
             if (integrationChangeHistories.size()>0){
-                return success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),integrationChangeHistories);
+                return super.success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),integrationChangeHistories);
             }else {
-                return failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
+                return super.failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
             }
         }
 
@@ -44,9 +44,9 @@ public class IntegrationController extends BaseController {
         public ResultData<IntegrationChangeHistory>  insertIntegrationChangeHistoryByToken(@RequestBody IntegrationChangeHistory integrationChangeHistory){
             Integer integer = integrationService.insertIntegrationChangeHistory(integrationChangeHistory);
             if (null!=integer){
-                return success(StatusEnum.INSERT_OPERATION.getCode(),StatusEnum.INSERT_OPERATION.getMsg(),integer);
+                return super.success(StatusEnum.INSERT_OPERATION.getCode(),StatusEnum.INSERT_OPERATION.getMsg(),integer);
             }else {
-                return failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
+                return super.failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
             }
         }
 
@@ -60,9 +60,9 @@ public class IntegrationController extends BaseController {
         Integer integer = integrationService.addMemberIntegration(token);
 
         if (null!=integer){
-            return success(StatusEnum.UPDATE_OPERATION.getCode(),StatusEnum.UPDATE_OPERATION.getMsg(),integer);
+            return super.success(StatusEnum.UPDATE_OPERATION.getCode(),StatusEnum.UPDATE_OPERATION.getMsg(),integer);
         }else {
-            return failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
+            return super.failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
         }
     }
 

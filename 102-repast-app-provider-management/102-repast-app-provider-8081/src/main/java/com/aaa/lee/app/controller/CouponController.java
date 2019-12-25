@@ -5,6 +5,7 @@ import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.model.Coupon;
 import com.aaa.lee.app.service.CouponService;
 import com.aaa.lee.app.status.StatusEnum;
+import com.aaa.lee.app.vo.CouponVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,13 +25,13 @@ public class CouponController extends BaseController {
      * @return
      */
     @PostMapping("/selectAllCoupon")
-    public ResultData<Coupon> selectAllCoupon(@RequestParam("token") String token){
+    public ResultData selectAllCoupon(@RequestParam("token") String token){
         List<Coupon> coupons = couponService.selectAllCoupon();
 
         if (coupons.size()>0){
-            return success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),coupons);
+            return super.success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),coupons);
         }else {
-            return failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
+            return super.failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
         }
     }
 
@@ -40,12 +41,13 @@ public class CouponController extends BaseController {
      * @return
      */
     @PostMapping("/insertCoupon")
-    public ResultData<Coupon> insertCoupon(@RequestParam("token") String token,@RequestBody Coupon coupon){
+    public ResultData insertCoupon(@RequestBody CouponVo couponVo){
+        Coupon coupon = couponVo.getCoupon();
         Integer result = couponService.insertCoupon(coupon);
         if (null!=result){
-            return success(StatusEnum.INSERT_OPERATION.getCode(),StatusEnum.INSERT_OPERATION.getMsg(),result);
+            return super.success(StatusEnum.INSERT_OPERATION.getCode(),StatusEnum.INSERT_OPERATION.getMsg(),result);
         }else {
-            return failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
+            return super.failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
         }
     }
 
@@ -55,12 +57,12 @@ public class CouponController extends BaseController {
      * @return
      */
     @PostMapping("/useCoupon")
-    public ResultData<Coupon> useCoupon(@RequestParam("token") String token,@RequestParam("couponId")Integer couponId){
+    public ResultData useCoupon(@RequestParam("token") String token,@RequestParam("couponId")Integer couponId){
         Integer result = couponService.useCoupon(couponId);
         if (null!=result){
-            return success(StatusEnum.SUCCESS.getCode(),StatusEnum.SUCCESS.getMsg(),result);
+            return super.success(StatusEnum.SUCCESS.getCode(),StatusEnum.SUCCESS.getMsg(),result);
         }else {
-            return failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
+            return super.failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
         }
     }
 
@@ -70,13 +72,18 @@ public class CouponController extends BaseController {
      * @return
      */
     @PostMapping("/selectCouponById")
-    public ResultData<Coupon> selectCouponById(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId){
+    public ResultData selectCouponById(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId){
         Coupon coupon = couponService.selectCouponById(couponId);
         if (null!=coupon){
-            return success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),coupon);
+            return super.success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),coupon);
         }else {
-            return failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
+            return super.failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
         }
     }
+
+    /**
+     * 删除所有过期优惠券
+     */
+
 
 }

@@ -5,6 +5,7 @@ import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.model.CouponHistory;
 import com.aaa.lee.app.service.CouponHistoryService;
 import com.aaa.lee.app.status.StatusEnum;
+import com.aaa.lee.app.vo.CouponHistoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,29 +26,30 @@ public class CouponHistoryController extends BaseController {
     public ResultData<CouponHistory> getAllCouponHistory(@RequestParam("token") String token){
         List<CouponHistory> allCouponHistory = couponHistoryService.getAllCouponHistory(token);
         if (allCouponHistory.size()>0){
-            return  success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),allCouponHistory);
+            return  super.success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),allCouponHistory);
         }else {
-            return  failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
+            return  super.failed(StatusEnum.NOT_EXIST.getCode(),StatusEnum.NOT_EXIST.getMsg());
         }
     }
 
     @PostMapping("/saveOrUpdateCouponHistory")
-    public ResultData<CouponHistory> saveOrUpdateCouponHistory(@RequestParam("token") String token,@RequestBody CouponHistory couponHistory){
+    public ResultData<CouponHistory> saveOrUpdateCouponHistory(@RequestBody CouponHistoryVo couponHistoryVo){
+        CouponHistory couponHistory = couponHistoryVo.getCouponHistory();
         Map<String, Object> resultMap = couponHistoryService.saveOrUpdateCouponHistory(couponHistory);
         if (null!=resultMap.get("data")){
-            return success((String) resultMap.get("code"),(String) resultMap.get("msg"),resultMap.get("data"));
+            return super.success((String) resultMap.get("code"),(String) resultMap.get("msg"),resultMap.get("data"));
         }else {
-            return failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
+            return super.failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
         }
     }
 
     @PostMapping("/deleteCouponHistory")
-    public ResultData<CouponHistory> deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id,@RequestParam("useState") Integer useState){
-        Integer result = couponHistoryService.deleteCouponHistoryById(id, useState);
+    public ResultData<CouponHistory> deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id){
+        Integer result = couponHistoryService.deleteCouponHistoryById(id);
         if (null!=result){
-            return success(StatusEnum.DELETE_OPERATION.getCode(),StatusEnum.DELETE_OPERATION.getMsg(),result);
+            return super.success(StatusEnum.DELETE_OPERATION.getCode(),StatusEnum.DELETE_OPERATION.getMsg(),result);
         }else {
-            return failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
+            return super.failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
         }
     }
 

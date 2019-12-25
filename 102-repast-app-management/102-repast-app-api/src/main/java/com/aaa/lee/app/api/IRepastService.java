@@ -9,6 +9,8 @@ import com.aaa.lee.app.model.IntegrationChangeHistory;
 import com.aaa.lee.app.status.StatusEnum;
 import com.aaa.lee.app.model.Member;
 import com.aaa.lee.app.model.*;
+import com.aaa.lee.app.vo.CouponHistoryVo;
+import com.aaa.lee.app.vo.CouponVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,7 +90,7 @@ public interface IRepastService {
      * @return
      */
     @PostMapping("/saveOrUpdateCouponHistory")
-    ResultData<CouponHistory> saveOrUpdateCouponHistory(@RequestParam("token") String token,@RequestBody CouponHistory couponHistory);
+    ResultData<CouponHistory> saveOrUpdateCouponHistory(@RequestBody CouponHistoryVo couponHistoryVo);
 
     /**
      * 删除
@@ -98,7 +100,7 @@ public interface IRepastService {
      * @return
      */
     @PostMapping("/deleteCouponHistory")
-    ResultData<CouponHistory> deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id,@RequestParam("useState") Integer useState );
+    ResultData<CouponHistory> deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id);
 
     /**
      * 优惠券操作
@@ -107,22 +109,22 @@ public interface IRepastService {
      * 查询所有的优惠券
      */
     @PostMapping("/selectAllCoupon")
-    public ResultData<Coupon> selectAllCoupon(@RequestParam("token") String token);
+    ResultData selectAllCoupon(@RequestParam("token") String token);
     /**
      *  商家或者系统发放优惠券时需要调用 进行优惠券的添加
      */
     @PostMapping("/insertCoupon")
-    ResultData<Coupon> insertCoupon(@RequestParam("token") String token,@RequestBody Coupon coupon);
+    ResultData insertCoupon(@RequestBody CouponVo couponVo);
     /**
      * 使用优惠券数量的操作
      */
     @PostMapping("/useCoupon")
-    ResultData<Coupon> useCoupon(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId);
+    ResultData useCoupon(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId);
     /**
      * 根据优惠券id查询优惠券
      */
     @PostMapping("/selectCouponById")
-    ResultData<Coupon> selectCouponById(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId);
+    ResultData selectCouponById(@RequestParam("token") String token,@RequestParam("couponId") Integer couponId);
 
     /**
      * 查询会员收货地址

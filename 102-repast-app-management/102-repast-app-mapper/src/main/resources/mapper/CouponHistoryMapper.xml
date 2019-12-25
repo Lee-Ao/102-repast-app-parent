@@ -20,10 +20,13 @@
   </resultMap>
 
   <update id="deleteCouponHistoryById">
-    update sms_coupon_history set use_status = #{useState} where id = #{id};
+    update sms_coupon_history set use_status = #{1} where id = #{id};
   </update>
 
   <select id="selectCouponHistoryByMemberId" >
-    select * from sms_coupon_history where member_id=#{memberId}
+    select * from sms_coupon_history where member_id=#{memberId} and use_status=#{0};
   </select>
+  <update id="outTimeCouponHistory">
+    update sms_coupon_history set use_status = #{2} where id = #{id};
+  </update>
 </mapper>

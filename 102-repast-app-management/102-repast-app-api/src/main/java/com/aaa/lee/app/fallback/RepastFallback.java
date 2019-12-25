@@ -3,6 +3,8 @@ package com.aaa.lee.app.fallback;
 import com.aaa.lee.app.api.IRepastService;
 import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.model.*;
+import com.aaa.lee.app.vo.CouponHistoryVo;
+import com.aaa.lee.app.vo.CouponVo;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -41,22 +43,23 @@ public class RepastFallback implements FallbackFactory<IRepastService> {
             }
 
             @Override
-            public ResultData<CouponHistory> saveOrUpdateCouponHistory(String token, CouponHistory couponHistory) {
+            public ResultData<CouponHistory> saveOrUpdateCouponHistory(CouponHistoryVo couponHistoryVo) {
                 return null;
             }
 
             @Override
-            public ResultData<CouponHistory> deleteCouponHistory(String token, Integer id, Integer useState) {
+            public ResultData<CouponHistory> deleteCouponHistory(String token, Integer id) {
+                return null;
+            }
+
+
+            @Override
+            public ResultData selectAllCoupon(String token) {
                 return null;
             }
 
             @Override
-            public ResultData<Coupon> selectAllCoupon(String token) {
-                return null;
-            }
-
-            @Override
-            public ResultData<Coupon> insertCoupon(String token, Coupon coupon) {
+            public ResultData<Coupon> insertCoupon(CouponVo couponVo) {
                 return null;
             }
 
@@ -104,6 +107,21 @@ public class RepastFallback implements FallbackFactory<IRepastService> {
 
             @Override
             public ResultData saveOrUpdateAddress(MemberReceiveAddress memberReceiveAddress) {
+                return null;
+            }
+
+            @Override
+            public ResultData<IntegrationChangeHistory> getAllIntegrationChangeHistoryByToken(String token) {
+                return null;
+            }
+
+            @Override
+            public ResultData<IntegrationChangeHistory> insertIntegrationChangeHistoryByToken(IntegrationChangeHistory integrationChangeHistory) {
+                return null;
+            }
+
+            @Override
+            public ResultData addMemberIntegration(String token) {
                 return null;
             }
 

@@ -9,6 +9,8 @@ public interface CouponHistoryMapper extends Mapper<CouponHistory> {
 
     List<CouponHistory> selectCouponHistoryByMemberId(Integer memberId);
 
-    Integer deleteCouponHistoryById(Integer id,Integer useState);
+    Integer deleteCouponHistoryById(Integer id);
+
+    Integer outTimeCouponHistory(Integer id);
 
 }
