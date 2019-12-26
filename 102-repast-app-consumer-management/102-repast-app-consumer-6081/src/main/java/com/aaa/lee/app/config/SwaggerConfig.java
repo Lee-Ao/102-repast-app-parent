@@ -33,8 +33,6 @@ public class SwaggerConfig {
      * @throws
     **/
     @Bean
-    public Docket createRrestApi() {
-    @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
@@ -50,7 +48,6 @@ public class SwaggerConfig {
                 .title("SAAS 接口文档")
                 .description("SAAS Framework 接口文档项目描述")
                 .contact(new Contact("Seven Lee", "http://www.seven.com", "sevenLee@gmain.com"))
-                .contact(new Contact("aaa", "http://www.seven.com", "sevenLee@gmain.com"))
                 .version("1.0")
                 .build();
     }

@@ -4,12 +4,14 @@ import com.aaa.lee.app.api.IRepastService;
 import com.aaa.lee.app.base.BaseController;
 import com.aaa.lee.app.base.ResultData;
 import com.aaa.lee.app.model.IntegrationChangeHistory;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+@Api(value = "积分信息",tags = "积分信息接口" )
 @RestController
 public class IntegrationController extends BaseController {
 
@@ -22,7 +24,8 @@ public class IntegrationController extends BaseController {
      * @return
      */
     @PostMapping("/getAllIntegrationChangeHistoryByToken")
-    ResultData<IntegrationChangeHistory> getAllIntegrationChangeHistoryByToken(String token){
+    @ApiOperation(value = "查询积分变动历史表")
+    public ResultData getAllIntegrationChangeHistoryByToken(String token){
         return IntegrationService.getAllIntegrationChangeHistoryByToken(token);
     }
 
@@ -31,8 +34,9 @@ public class IntegrationController extends BaseController {
      * @param integrationChangeHistory
      * @return
      */
+    @ApiOperation(value = "新增积分变动历史")
     @PostMapping("/insertIntegrationChangeHistoryByToken")
-    ResultData<IntegrationChangeHistory>  insertIntegrationChangeHistoryByToken(IntegrationChangeHistory integrationChangeHistory){
+    public ResultData  insertIntegrationChangeHistoryByToken(IntegrationChangeHistory integrationChangeHistory){
         return IntegrationService.insertIntegrationChangeHistoryByToken(integrationChangeHistory);
     }
 
@@ -42,7 +46,8 @@ public class IntegrationController extends BaseController {
      * @return
      */
     @PostMapping("/addMemberIntegration")
-    ResultData addMemberIntegration(String token){
+    @ApiOperation(value = "用户消费后对用户积分新增")
+    public ResultData addMemberIntegration(String token){
         return IntegrationService.addMemberIntegration(token);
     }
 

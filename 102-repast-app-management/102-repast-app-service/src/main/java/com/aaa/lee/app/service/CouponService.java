@@ -44,7 +44,7 @@ public class CouponService extends BaseService<Coupon> {
     public Integer useCoupon(Integer couponId){
         Coupon coupon = this.selectCouponById(couponId);
         if (coupon.getCount()>coupon.getUseCount()){
-            coupon.setUseCount(coupon.getCount()+1);
+            coupon.setUseCount(coupon.getUseCount()+1);
             return couponMapper.updateByPrimaryKey(coupon);
         }else {
             return null;

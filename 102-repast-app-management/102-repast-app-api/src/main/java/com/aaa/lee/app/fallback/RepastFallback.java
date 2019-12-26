@@ -69,33 +69,7 @@ public class RepastFallback implements FallbackFactory<IRepastService> {
             }
 
             @Override
-            public ResultData<Coupon> selectCouponById(String token, Integer couponId) {
-            public ResultData<CouponHistory> saveOrUpdateCouponHistory(String token, CouponHistory couponHistory) {
-                return null;
-            }
-
-            @Override
-            public ResultData<CouponHistory> deleteCouponHistory(String token, Integer id, Integer useState) {
-                return null;
-            }
-
-            @Override
-            public ResultData<Coupon> selectAllCoupon(String token) {
-                return null;
-            }
-
-            @Override
-            public ResultData<Coupon> insertCoupon(String token, Coupon coupon) {
-                return null;
-            }
-
-            @Override
-            public ResultData<Coupon> useCoupon(String token, Integer couponId) {
-                return null;
-            }
-
-            @Override
-            public ResultData<Coupon> selectCouponById(String token, Integer couponId) {
+            public ResultData selectCouponById(String token, Integer couponId) {
                 return null;
             }
 
@@ -104,9 +78,18 @@ public class RepastFallback implements FallbackFactory<IRepastService> {
                 return null;
             }
 
-
             @Override
             public ResultData saveOrUpdateAddress(MemberReceiveAddress memberReceiveAddress) {
+                return null;
+            }
+
+            @Override
+            public ResultData deleteAddress(String token, Long id) {
+                return null;
+            }
+
+            @Override
+            public ResultData updateAddressStatus(String token, Long id, Long memberId) {
                 return null;
             }
 
@@ -126,23 +109,17 @@ public class RepastFallback implements FallbackFactory<IRepastService> {
             }
 
             @Override
-            public Map<String,Object> selectAllOrderItem(String toKen) {
+            public Map<String, Object> selectAllOrderItem(String toKen) {
                 return null;
             }
 
             @Override
-            public Map<String,Object> orderStatusSelect(String toKen, Long memberId, Long status) {
+            public Map<String, Object> orderStatusSelect(String toKen, Long memberId, Long status) {
                 return null;
             }
 
             @Override
             public ResultData selectFund(String toKen) {
-            public ResultData deleteAddress(String token, Long id) {
-                return null;
-            }
-
-            @Override
-            public ResultData updateAddressStatus(String token, Long id, Long memberId) {
                 return null;
             }
 

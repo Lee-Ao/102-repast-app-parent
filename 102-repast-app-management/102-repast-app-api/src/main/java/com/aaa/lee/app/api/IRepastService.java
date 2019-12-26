@@ -90,7 +90,7 @@ public interface IRepastService {
      * @return
      */
     @PostMapping("/saveOrUpdateCouponHistory")
-    ResultData<CouponHistory> saveOrUpdateCouponHistory(@RequestBody CouponHistoryVo couponHistoryVo);
+    ResultData saveOrUpdateCouponHistory(@RequestBody CouponHistoryVo couponHistoryVo);
 
     /**
      * 删除
@@ -100,7 +100,7 @@ public interface IRepastService {
      * @return
      */
     @PostMapping("/deleteCouponHistory")
-    ResultData<CouponHistory> deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id);
+    ResultData deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id);
 
     /**
      * 优惠券操作
@@ -167,7 +167,7 @@ public interface IRepastService {
      * @return
      */
     @PostMapping("/getAllIntegrationChangeHistoryByToken")
-    ResultData<IntegrationChangeHistory> getAllIntegrationChangeHistoryByToken(@RequestParam("token") String token);
+    ResultData getAllIntegrationChangeHistoryByToken(@RequestParam("token") String token);
 
     /**
      * 新增积分变动历史表
@@ -175,7 +175,7 @@ public interface IRepastService {
      * @return
      */
     @PostMapping("/insertIntegrationChangeHistoryByToken")
-    ResultData<IntegrationChangeHistory>  insertIntegrationChangeHistoryByToken(@RequestBody IntegrationChangeHistory integrationChangeHistory);
+    ResultData  insertIntegrationChangeHistoryByToken(@RequestBody IntegrationChangeHistory integrationChangeHistory);
 
     /**
      * 用户消费后对用户积分进行新增操作

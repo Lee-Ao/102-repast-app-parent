@@ -9,12 +9,14 @@ import com.aaa.lee.app.model.Coupon;
 import com.aaa.lee.app.model.CouponHistory;
 import com.aaa.lee.app.model.Member;
 import com.aaa.lee.app.status.StatusEnum;
+import com.aaa.lee.app.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +49,7 @@ public class CouponHistoryService extends BaseService<CouponHistory> {
         Example.Criteria memberCriteria = memberExample.createCriteria();
         memberCriteria.andEqualTo("token", token);
 
-        Member member = memberMapper.selectOneByExample(memberCriteria);
+        Member member = memberMapper.selectOneByExample(memberExample);
         //根据token查询用户
         return couponHistoryMapper.selectCouponHistoryByMemberId(Integer.valueOf(member.getId().toString()));
     }
@@ -57,21 +59,17 @@ public class CouponHistoryService extends BaseService<CouponHistory> {
      * @param couponHistory
      * @return
      */
-    public Map<String,Object> saveOrUpdateCouponHistory(CouponHistory couponHistory){
+    public Integer saveOrUpdateCouponHistory(CouponHistory couponHistory){
+        couponHistory.setCreateTime(Timestamp.valueOf(DateUtil.getDateNow()));
         Integer result;
-        Map<String,Object> resultData=new HashMap<>();
         if (null!=couponHistory.getId()) {
-            result = couponHistoryMapper.insert(couponHistory);
-            resultData.put("code",StatusEnum.INSERT_OPERATION.getCode());
-            resultData.put("msg",StatusEnum.INSERT_OPERATION.getMsg());
-            resultData.put("data",result);
-        }else {
             result = couponHistoryMapper.updateByPrimaryKey(couponHistory);
-            resultData.put("code",StatusEnum.UPDATE_OPERATION.getCode());
-            resultData.put("msg",StatusEnum.UPDATE_OPERATION.getMsg());
-            resultData.put("data",result);
+
+
+        }else {
+            result = couponHistoryMapper.insert(couponHistory);
         }
-        return resultData;
+        return result;
     }
 
     /**

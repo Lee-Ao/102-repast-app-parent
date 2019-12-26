@@ -42,7 +42,7 @@ public class CouponHistoryController extends BaseController {
      */
     @PostMapping("/saveOrUpdateCouponHistory")
     @ApiOperation(value = "新增或者修改优惠券历史")
-    public ResultData<CouponHistory> saveOrUpdateCouponHistory(String token,CouponHistory couponHistory){
+    public ResultData saveOrUpdateCouponHistory(String token,CouponHistory couponHistory){
 
         CouponHistoryVo couponHistoryVo = new CouponHistoryVo();
         couponHistoryVo.setToken(token);
@@ -60,7 +60,7 @@ public class CouponHistoryController extends BaseController {
      */
     @PostMapping("/deleteCouponHistory")
     @ApiOperation(value = "使用优惠券或者优惠券过期")
-    public ResultData<CouponHistory> deleteCouponHistory(String token,Integer id){
+    public ResultData deleteCouponHistory(String token,Integer id){
         return couponHistoryService.deleteCouponHistory(token,id);
     }
 

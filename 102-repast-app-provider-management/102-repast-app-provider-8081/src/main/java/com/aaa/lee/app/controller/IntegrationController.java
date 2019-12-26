@@ -26,7 +26,7 @@ public class IntegrationController extends BaseController {
      * @return
      */
         @PostMapping("/getAllIntegrationChangeHistoryByToken")
-        public ResultData<IntegrationChangeHistory> getAllIntegrationChangeHistoryByToken(@RequestParam("token") String token){
+        public ResultData getAllIntegrationChangeHistoryByToken(@RequestParam("token") String token){
             List<IntegrationChangeHistory> integrationChangeHistories = integrationService.getAllIntegrationChangeHistoryByToken(token);
             if (integrationChangeHistories.size()>0){
                 return super.success(StatusEnum.EXIST.getCode(),StatusEnum.EXIST.getMsg(),integrationChangeHistories);
@@ -41,7 +41,7 @@ public class IntegrationController extends BaseController {
          * @return
          */
         @PostMapping("/insertIntegrationChangeHistoryByToken")
-        public ResultData<IntegrationChangeHistory>  insertIntegrationChangeHistoryByToken(@RequestBody IntegrationChangeHistory integrationChangeHistory){
+        public ResultData  insertIntegrationChangeHistoryByToken(@RequestBody IntegrationChangeHistory integrationChangeHistory){
             Integer integer = integrationService.insertIntegrationChangeHistory(integrationChangeHistory);
             if (null!=integer){
                 return super.success(StatusEnum.INSERT_OPERATION.getCode(),StatusEnum.INSERT_OPERATION.getMsg(),integer);

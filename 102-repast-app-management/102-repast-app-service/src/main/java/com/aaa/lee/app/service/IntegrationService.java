@@ -41,7 +41,7 @@ public class IntegrationService extends BaseService<IntegrationChangeHistory> {
         Example.Criteria memberCriteria = memberExample.createCriteria();
         memberCriteria.andEqualTo("token", token);
 
-        Member member = memberMapper.selectOneByExample(memberCriteria);
+        Member member = memberMapper.selectOneByExample(memberExample);
 
         if (member==null){
             return null;
@@ -50,9 +50,10 @@ public class IntegrationService extends BaseService<IntegrationChangeHistory> {
         Example example = new Example(IntegrationChangeHistory.class);
         Example.Criteria criteria = example.createCriteria();
         //条件member_id=1
-        criteria.andEqualTo("member_id",member.getId());
+        Long memberId = member.getId();
+        criteria.andEqualTo("memberId",memberId);
 
-        List<IntegrationChangeHistory> integrationChangeHistories = integrationChangeHistoryMapper.selectByExample(criteria);
+        List<IntegrationChangeHistory> integrationChangeHistories = integrationChangeHistoryMapper.selectByExample(example);
 
         return integrationChangeHistories;
     }
@@ -76,7 +77,7 @@ public class IntegrationService extends BaseService<IntegrationChangeHistory> {
         Example.Criteria memberCriteria = memberExample.createCriteria();
         memberCriteria.andEqualTo("token", token);
 
-        Member member = memberMapper.selectOneByExample(memberCriteria);
+        Member member = memberMapper.selectOneByExample(memberExample);
         //每次订单执行该方法添加五十积分
         member.setIntegration(member.getIntegration()+50);
 

@@ -33,18 +33,18 @@ public class CouponHistoryController extends BaseController {
     }
 
     @PostMapping("/saveOrUpdateCouponHistory")
-    public ResultData<CouponHistory> saveOrUpdateCouponHistory(@RequestBody CouponHistoryVo couponHistoryVo){
+    public ResultData saveOrUpdateCouponHistory(@RequestBody CouponHistoryVo couponHistoryVo){
         CouponHistory couponHistory = couponHistoryVo.getCouponHistory();
-        Map<String, Object> resultMap = couponHistoryService.saveOrUpdateCouponHistory(couponHistory);
-        if (null!=resultMap.get("data")){
-            return super.success((String) resultMap.get("code"),(String) resultMap.get("msg"),resultMap.get("data"));
+        Integer result = couponHistoryService.saveOrUpdateCouponHistory(couponHistory);
+        if (null!=result){
+            return super.success(StatusEnum.SUCCESS.getCode(),StatusEnum.SUCCESS.getMsg(),result);
         }else {
             return super.failed(StatusEnum.FAILED.getCode(),StatusEnum.FAILED.getMsg());
         }
     }
 
     @PostMapping("/deleteCouponHistory")
-    public ResultData<CouponHistory> deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id){
+    public ResultData deleteCouponHistory(@RequestParam("token") String token,@RequestParam("id") Integer id){
         Integer result = couponHistoryService.deleteCouponHistoryById(id);
         if (null!=result){
             return super.success(StatusEnum.DELETE_OPERATION.getCode(),StatusEnum.DELETE_OPERATION.getMsg(),result);
